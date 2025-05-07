@@ -1,22 +1,44 @@
-package br.com.budgetboys.pf_finance_service.model;
+package br.com.budgetboys.pf_finance_service.domain;
 
-import br.com.budgetboys.pf_finance_service.model.enums.IncomeCategory;
-import jakarta.persistence.*;
+import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.enums.IncomeCategory;
 
 import java.util.UUID;
 
-@Entity
 public class Income {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "income_id", unique = true, nullable = false)
     private UUID id;
-
-    @Column(name = "income_amout", nullable = false)
     private double amount;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "income_category")
     private IncomeCategory category;
+
+    public Income () {}
+
+    public Income(UUID id, double amount, IncomeCategory category){
+        this.id = id;
+        this.amount = amount;
+        this.category = category;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public IncomeCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(IncomeCategory category) {
+        this.category = category;
+    }
 }
