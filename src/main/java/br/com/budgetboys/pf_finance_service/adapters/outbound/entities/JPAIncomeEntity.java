@@ -15,7 +15,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class IncomeJPA {
+public class JPAIncomeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "income_id", unique = true, nullable = false)
