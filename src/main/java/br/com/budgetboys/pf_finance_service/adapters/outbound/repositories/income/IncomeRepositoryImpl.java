@@ -2,11 +2,18 @@ package br.com.budgetboys.pf_finance_service.adapters.outbound.repositories.inco
 
 import br.com.budgetboys.pf_finance_service.domain.income.Income;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.UUID;
 
 public class IncomeRepositoryImpl implements IncomeRepository {
+
+    private JPAIncomeRepository jpaIncomeRepository;
+
+    public IncomeRepositoryImpl(JPAIncomeRepository jpaIncomeRepository) {
+        this.jpaIncomeRepository = jpaIncomeRepository;
+    }
 
     @Override
     public Income save(Income income) {
