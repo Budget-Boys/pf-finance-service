@@ -1,4 +1,4 @@
-package br.com.budgetboys.pf_finance_service.domain;
+package br.com.budgetboys.pf_finance_service.domain.income;
 
 import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.enums.IncomeCategory;
 
