@@ -1,0 +1,45 @@
+package br.com.budgetboys.pf_finance_service.domain.expense;
+
+import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.enums.ExpenseCategory;
+
+import java.util.UUID;
+
+public class Expense {
+
+    private UUID id;
+    private double amount;
+    private ExpenseCategory category;
+
+    public Expense() {
+    }
+
+    public Expense(UUID id, double amount, ExpenseCategory category) {
+        this.id = id;
+        this.amount = amount;
+        this.category = category;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public ExpenseCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ExpenseCategory category) {
+        this.category = category;
+    }
+}
