@@ -1,6 +1,7 @@
 package br.com.budgetboys.pf_finance_service.adapters.outbound.entities;
 
 import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.enums.IncomeCategory;
+import br.com.budgetboys.pf_finance_service.domain.income.Income;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,4 +28,10 @@ public class JPAIncomeEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "income_category")
     private IncomeCategory category;
+
+    public JPAIncomeEntity(Income income) {
+        this.id = income.getId();
+        this.amount = income.getAmount();
+        this.category = income.getCategory();
+    }
 }
