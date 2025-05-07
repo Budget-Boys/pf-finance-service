@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class IncomeRepositoryImpl implements IncomeRepository {
 
-    private JPAIncomeRepository jpaIncomeRepository;
+    private final JPAIncomeRepository jpaIncomeRepository;
 
     public IncomeRepositoryImpl(JPAIncomeRepository jpaIncomeRepository) {
         this.jpaIncomeRepository = jpaIncomeRepository;
