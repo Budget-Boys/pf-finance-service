@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Table(name = "expense")
@@ -29,9 +30,17 @@ public class JPAExpenseEntity {
     @Column(name = "expense_category", nullable = false)
     private ExpenseCategory category;
 
+    @Column(name = "creation_date", nullable = false)
+    private Date creationDate;
+
+    @Column(name = "user_id", nullable = false)
+    private UUID userId;
+
     public JPAExpenseEntity(Expense expense) {
         this.id = expense.getId();
         this.amount = expense.getAmount();
         this.category = expense.getCategory();
+        this.creationDate = expense.getCreationDate();
+        this.userId = expense.getUserId();
     }
 }

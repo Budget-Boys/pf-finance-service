@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Table(name = "income")
@@ -26,12 +27,20 @@ public class JPAIncomeEntity {
     private double amount;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "income_category")
+    @Column(name = "income_category", nullable = false)
     private IncomeCategory category;
+
+    @Column(name = "creation_date", nullable = false)
+    private Date creationDate;
+
+    @Column(name = "user_id", nullable = false)
+    private UUID userId;
 
     public JPAIncomeEntity(Income income) {
         this.id = income.getId();
         this.amount = income.getAmount();
         this.category = income.getCategory();
+        this.creationDate = income.getCreationDate();
+        this.userId = income.getUserId();
     }
 }
