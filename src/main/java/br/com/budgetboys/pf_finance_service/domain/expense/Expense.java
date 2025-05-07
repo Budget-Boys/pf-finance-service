@@ -2,6 +2,7 @@ package br.com.budgetboys.pf_finance_service.domain.expense;
 
 import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.enums.ExpenseCategory;
 
+import java.util.Date;
 import java.util.UUID;
 
 public class Expense {
@@ -9,6 +10,8 @@ public class Expense {
     private UUID id;
     private double amount;
     private ExpenseCategory category;
+    private Date creationDate;
+    private UUID userId;
 
     public Expense() {
     }
@@ -41,5 +44,21 @@ public class Expense {
 
     public void setCategory(ExpenseCategory category) {
         this.category = category;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 }
