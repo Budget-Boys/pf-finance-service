@@ -14,5 +14,11 @@ public class IncomeService {
         this.incomeRepository = incomeRepository;
     }
     
-    
+    public Income saveIncome(Income income){
+
+        if(income.getAmount() < 0){
+            throw new IllegalArgumentException("The expense amount cannot be negative");
+        }
+        return incomeRepository.save(income);
+    }
 }
