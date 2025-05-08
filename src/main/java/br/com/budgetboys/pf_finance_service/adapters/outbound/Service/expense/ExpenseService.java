@@ -2,6 +2,7 @@ package br.com.budgetboys.pf_finance_service.adapters.outbound.service.expense;
 
 import org.springframework.stereotype.Service;
 
+import br.com.budgetboys.pf_finance_service.domain.expense.Expense;
 import br.com.budgetboys.pf_finance_service.domain.expense.ExpenseRepository;
 
 @Service
@@ -11,5 +12,10 @@ public class ExpenseService {
 
     public ExpenseService (ExpenseRepository expenseRepository){
         this.expenseRepository = expenseRepository;
+    }
+
+    public Expense saveExpense(Expense expense){
+        
+        return expenseRepository.save(expense);
     }
 }
