@@ -30,5 +30,7 @@ public class ExpenseService {
        return expenseRepository.findAll(); 
     }
 
-    
+    public void deleteExpense(UUID id){
+        expenseRepository.deleteById(id);
+    }
 }
