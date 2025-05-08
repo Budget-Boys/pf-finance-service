@@ -13,9 +13,6 @@ public class Expense {
     private Date creationDate;
     private UUID userId;
 
-    public Expense() {
-    }
-
     public Expense(UUID id, double amount, ExpenseCategory category) {
         this.id = id;
         this.amount = amount;
