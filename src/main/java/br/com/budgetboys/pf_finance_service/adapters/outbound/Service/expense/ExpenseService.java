@@ -26,7 +26,9 @@ public class ExpenseService {
         return expenseRepository.findById(id);
     }
 
-    public List<Expense> getAllExpress(){
+    public List<Expense> getAllExpenses(){
        return expenseRepository.findAll(); 
     }
+
+    
 }
