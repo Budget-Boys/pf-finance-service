@@ -1,4 +1,4 @@
-package br.com.budgetboys.pf_finance_service.adapters.outbound.Service.expense;
+package br.com.budgetboys.pf_finance_service.adapters.outbound.service.expense;
 
 import org.springframework.stereotype.Service;
 
