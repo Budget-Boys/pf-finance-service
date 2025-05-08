@@ -1,5 +1,6 @@
 package br.com.budgetboys.pf_finance_service.adapters.outbound.service.expense;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -23,5 +24,9 @@ public class ExpenseService {
 
     public Expense findExpenseById(UUID id){
         return expenseRepository.findById(id);
+    }
+
+    public List<Expense> getAllExpress(){
+       return expenseRepository.findAll(); 
     }
 }
