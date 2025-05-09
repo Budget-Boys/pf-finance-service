@@ -36,4 +36,8 @@ public class IncomeService {
     public List<Income> getAllIncomes(){
         return incomeRepository.findAll();
     }
+
+    public void deleteIncome(UUID id){
+        incomeRepository.deleteById(id);
+    }
 }
