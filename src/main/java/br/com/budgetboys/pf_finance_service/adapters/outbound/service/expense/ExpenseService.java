@@ -18,12 +18,18 @@ public class ExpenseService {
     }
 
     public Expense saveExpense(Expense expense){
-
+        if(expense.getAmount() < 0){
+            throw new IllegalArgumentException("The expense amount cannot be negative");
+        }
         return expenseRepository.save(expense);
     }
 
     public Expense findExpenseById(UUID id){
-        return expenseRepository.findById(id);
+        Expense expense = expenseRepository.findById(id);
+        if(expense == null) {
+            throw new IllegalArgumentException("Expense Id: "+id+ " not found");
+        }
+        return expense;                       
     }
 
     public List<Expense> getAllExpenses(){
