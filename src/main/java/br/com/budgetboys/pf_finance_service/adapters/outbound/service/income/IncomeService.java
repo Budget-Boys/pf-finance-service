@@ -20,7 +20,7 @@ public class IncomeService {
     public Income saveIncome(Income income){
 
         if(income.getAmount() < 0){
-            throw new IllegalArgumentException("The expense amount cannot be negative");
+            throw new IllegalArgumentException("The income amount cannot be negative");
         }
         return incomeRepository.save(income);
     }
@@ -28,7 +28,7 @@ public class IncomeService {
     public Income findIncomeById(UUID id){
         Income income = incomeRepository.findById(id);
         if(income == null){
-            throw new IllegalArgumentException("Expense Id: " +id+ "not found");
+            throw new IllegalArgumentException("Income Id: " +id+ "not found");
         }
         return income;
     }

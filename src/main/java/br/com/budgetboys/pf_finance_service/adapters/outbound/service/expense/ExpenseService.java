@@ -19,7 +19,7 @@ public class ExpenseService {
 
     public Expense saveExpense(Expense expense){
         if(expense.getAmount() < 0){
-            throw new IllegalArgumentException("O valor da despesa não pode ser negativo");
+            throw new IllegalArgumentException("The expense amount cannot be negative");
         }
         return expenseRepository.save(expense);
     }
@@ -27,7 +27,7 @@ public class ExpenseService {
     public Expense findExpenseById(UUID id){
         Expense expense = expenseRepository.findById(id);
         if(expense == null) {
-            throw new IllegalArgumentException("Despesa do Id: "+id+ " não foi encontrada");
+            throw new IllegalArgumentException("Expense Id: "+id+ " not found");
         }
         return expense;                       
     }
