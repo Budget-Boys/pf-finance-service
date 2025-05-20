@@ -10,7 +10,7 @@ import br.com.budgetboys.pf_finance_service.domain.expense.ExpenseRepository;
 
 @Service
 public class ExpenseService {
-    
+
     private final ExpenseRepository expenseRepository;
 
     public ExpenseService (ExpenseRepository expenseRepository){
@@ -18,7 +18,6 @@ public class ExpenseService {
     }
 
     public Expense saveExpense(Expense expense){
-
         return expenseRepository.save(expense);
     }
 
