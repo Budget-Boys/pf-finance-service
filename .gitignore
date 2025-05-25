@@ -34,3 +34,6 @@ build/
 
 ### Docker ###
 compose.yaml
+
+### Database config ###
+src/main/resources/application.properties
