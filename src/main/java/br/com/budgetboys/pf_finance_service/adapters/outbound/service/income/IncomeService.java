@@ -1,9 +1,5 @@
 package br.com.budgetboys.pf_finance_service.adapters.outbound.service.income;
 
-<<<<<<< HEAD
-public class IncomeService {
-    
-=======
 import java.util.List;
 import java.util.UUID;
 
@@ -44,5 +40,4 @@ public class IncomeService {
     public void deleteIncome(UUID id){
         incomeRepository.deleteById(id);
     }
->>>>>>> feature/create-service
 }

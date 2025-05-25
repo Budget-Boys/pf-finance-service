@@ -18,12 +18,9 @@ public class ExpenseService {
     }
 
     public Expense saveExpense(Expense expense){
-<<<<<<< HEAD
-=======
         if(expense.getAmount() < 0){
             throw new IllegalArgumentException("The expense amount cannot be negative");
         }
->>>>>>> feature/create-service
         return expenseRepository.save(expense);
     }
 
