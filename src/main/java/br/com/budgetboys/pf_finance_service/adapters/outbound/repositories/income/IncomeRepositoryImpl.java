@@ -3,6 +3,7 @@ package br.com.budgetboys.pf_finance_service.adapters.outbound.repositories.inco
 import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.JPAIncomeEntity;
 import br.com.budgetboys.pf_finance_service.domain.income.Income;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeRepository;
+import br.com.budgetboys.pf_finance_service.utils.mappers.IncomeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,15 +17,17 @@ public class IncomeRepositoryImpl implements IncomeRepository {
 
     private final JPAIncomeRepository jpaIncomeRepository;
 
-    public IncomeRepositoryImpl(JPAIncomeRepository jpaIncomeRepository) {
+    private final IncomeMapper incomeMapper;
+
+    public IncomeRepositoryImpl(JPAIncomeRepository jpaIncomeRepository, IncomeMapper incomeMapper) {
         this.jpaIncomeRepository = jpaIncomeRepository;
+        this.incomeMapper = incomeMapper;
     }
 
     @Override
     public Income save(Income income) {
         JPAIncomeEntity incomeEntity = new JPAIncomeEntity(income);
-        this.jpaIncomeRepository.save(incomeEntity);
-        return new Income(incomeEntity.getId(), incomeEntity.getAmount(), incomeEntity.getCategory());
+        return this.incomeMapper.jpaToIncome(this.jpaIncomeRepository.save(incomeEntity));
     }
 
     @Override
