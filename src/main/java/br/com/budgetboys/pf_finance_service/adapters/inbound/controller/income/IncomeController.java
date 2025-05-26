@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/income")
+@RequestMapping("income")
 public class IncomeController {
 
     private final IncomeService incomeService;
@@ -19,7 +19,7 @@ public class IncomeController {
         this.incomeService = incomeService;
     }
 
-    @PostMapping
+    @PostMapping("create")
     public ResponseEntity<?> create(@RequestBody IncomeCreateDTO income) {
         try {
             IncomeResponseDTO savedIncome = this.incomeService.saveIncome(income);
