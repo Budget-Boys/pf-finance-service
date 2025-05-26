@@ -2,6 +2,8 @@ package br.com.budgetboys.pf_finance_service.adapters.inbound.controller.income;
 
 import br.com.budgetboys.pf_finance_service.adapters.outbound.service.income.IncomeService;
 import br.com.budgetboys.pf_finance_service.domain.income.Income;
+import br.com.budgetboys.pf_finance_service.domain.income.IncomeCreateDTO;
+import br.com.budgetboys.pf_finance_service.domain.income.IncomeResponseDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,9 +21,9 @@ public class IncomeController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Income income) {
+    public ResponseEntity<?> create(@RequestBody IncomeCreateDTO income) {
         try {
-            Income savedIncome = this.incomeService.saveIncome(income);
+            IncomeResponseDTO savedIncome = this.incomeService.saveIncome(income);
             return ResponseEntity.ok(savedIncome);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
