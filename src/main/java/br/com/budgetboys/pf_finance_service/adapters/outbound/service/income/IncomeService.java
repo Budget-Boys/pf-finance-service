@@ -3,6 +3,9 @@ package br.com.budgetboys.pf_finance_service.adapters.outbound.service.income;
 import java.util.List;
 import java.util.UUID;
 
+import br.com.budgetboys.pf_finance_service.domain.income.IncomeCreateDTO;
+import br.com.budgetboys.pf_finance_service.domain.income.IncomeResponseDTO;
+import br.com.budgetboys.pf_finance_service.utils.mappers.IncomeMapper;
 import org.springframework.stereotype.Service;
 
 import br.com.budgetboys.pf_finance_service.domain.income.Income;
@@ -13,16 +16,23 @@ public class IncomeService {
 
     private final IncomeRepository incomeRepository;
 
+    private IncomeMapper incomeMapper;
+
     public IncomeService (IncomeRepository incomeRepository){
         this.incomeRepository = incomeRepository;
     }
     
-    public Income saveIncome(Income income){
+    public IncomeResponseDTO saveIncome(IncomeCreateDTO income){
 
         if(income.getAmount() < 0){
             throw new IllegalArgumentException("The income amount cannot be negative");
         }
-        return incomeRepository.save(income);
+
+        Income incomeEntity = incomeMapper.toEntity(income);
+
+        Income jpaIncomeEntity = incomeRepository.save(incomeEntity);
+
+        return incomeMapper.toResponseDto(jpaIncomeEntity);
     }
 
     public Income findIncomeById(UUID id){
