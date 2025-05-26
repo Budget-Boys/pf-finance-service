@@ -1,7 +1,6 @@
 package br.com.budgetboys.pf_finance_service.adapters.inbound.controller.income;
 
 import br.com.budgetboys.pf_finance_service.adapters.outbound.service.income.IncomeService;
-import br.com.budgetboys.pf_finance_service.domain.income.Income;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeCreateDTO;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeResponseDTO;
 import org.springframework.http.ResponseEntity;
