@@ -3,6 +3,7 @@ package br.com.budgetboys.pf_finance_service.adapters.outbound.repositories.inco
 import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.JPAIncomeEntity;
 import br.com.budgetboys.pf_finance_service.domain.income.Income;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeRepository;
+import br.com.budgetboys.pf_finance_service.domain.income.IncomeResponseDTO;
 import br.com.budgetboys.pf_finance_service.utils.mappers.IncomeMapper;
 import org.springframework.stereotype.Repository;
 
@@ -37,8 +38,8 @@ public class IncomeRepositoryImpl implements IncomeRepository {
     }
 
     @Override
-    public List<Income> findAll() {
-        return this.jpaIncomeRepository.findAll().stream().map(incomeMapper::jpaToIncome).collect(Collectors.toList());
+    public List<IncomeResponseDTO> findAll() {
+        return this.jpaIncomeRepository.findAll().stream().map(incomeMapper::jpaToResponseDto).collect(Collectors.toList());
 
     }
 
