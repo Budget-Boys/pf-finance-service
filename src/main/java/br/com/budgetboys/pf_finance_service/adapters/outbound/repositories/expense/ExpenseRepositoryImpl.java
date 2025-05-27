@@ -24,9 +24,9 @@ public class ExpenseRepositoryImpl implements ExpenseRepository {
 
     @Override
     public Expense save(Expense expense) {
-        JPAExpenseEntity expenseEntity = new JPAExpenseEntity(expense);
-        this.jpaExpenseRepository.save(expenseEntity);
-        return expense;
+        JPAExpenseEntity expenseEntity = expenseMapper.expenseToJpa(expense);
+        JPAExpenseEntity savedEntity = jpaExpenseRepository.save(expenseEntity);
+        return expenseMapper.jpaToExpense(savedEntity);
     }
 
     @Override
