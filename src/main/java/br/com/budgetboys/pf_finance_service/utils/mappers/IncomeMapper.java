@@ -46,4 +46,13 @@ public interface IncomeMapper {
         @Mapping(source = "income.userId", target = "userId")
     })
     JPAIncomeEntity incomeToJpa(Income income);
+
+     @Mappings({
+             @Mapping(source = "jpa.id", target = "id"),
+             @Mapping(source = "jpa.amount", target = "amount"),
+             @Mapping(source = "jpa.category", target = "category"),
+             @Mapping(source = "jpa.creationDate", target = "creationDate"),
+             @Mapping(source = "jpa.userId", target = "userId")
+     })
+     IncomeResponseDTO jpaToResponseDto(JPAIncomeEntity jpaIncomeEntity);
 }
