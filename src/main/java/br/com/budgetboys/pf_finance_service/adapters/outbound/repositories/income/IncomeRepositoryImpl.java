@@ -34,7 +34,7 @@ public class IncomeRepositoryImpl implements IncomeRepository {
     @Override
     public Income findById(UUID id) {
         Optional<JPAIncomeEntity> incomeEntity = this.jpaIncomeRepository.findById(id);
-        return incomeEntity.map(entity -> new Income(entity.getId(), entity.getAmount(), entity.getCategory())).orElse(null);
+        return incomeEntity.map(incomeMapper::jpaToIncome).orElse(null);
     }
 
     @Override
