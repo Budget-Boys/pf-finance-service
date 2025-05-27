@@ -44,6 +44,6 @@ public class ExpenseRepositoryImpl implements ExpenseRepository {
 
     @Override
     public void deleteById(UUID id) {
-        
+        jpaExpenseRepository.deleteById(id);
     }
 }
