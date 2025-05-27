@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 import java.util.UUID;
@@ -30,7 +31,8 @@ public class JPAExpenseEntity {
     @Column(name = "expense_category", nullable = false)
     private ExpenseCategory category;
 
-    @Column(name = "creation_date", nullable = false)
+    @CreationTimestamp
+    @Column(name = "creation_date", nullable = false, updatable = false)
     private Date creationDate;
 
     @Column(name = "user_id", nullable = false)
