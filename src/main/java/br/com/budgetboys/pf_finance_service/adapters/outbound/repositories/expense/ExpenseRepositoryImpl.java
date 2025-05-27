@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Repository
 public class ExpenseRepositoryImpl implements ExpenseRepository {
@@ -38,11 +39,11 @@ public class ExpenseRepositoryImpl implements ExpenseRepository {
 
     @Override
     public List<Expense> findAll() {
-        return null;
+        return jpaExpenseRepository.findAll().stream().map(expenseMapper::jpaToExpense).collect(Collectors.toList());
     }
 
     @Override
     public void deleteById(UUID id) {
-
+        
     }
 }
