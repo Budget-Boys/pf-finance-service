@@ -6,6 +6,7 @@ import br.com.budgetboys.pf_finance_service.domain.income.IncomeResponseDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -40,5 +41,10 @@ public class IncomeController {
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
+    }
+
+    @GetMapping("findall")
+    public ResponseEntity<List<IncomeResponseDTO>> findAll() {
+        return ResponseEntity.ok().body(this.incomeService.findAllIncomes());
     }
 }
