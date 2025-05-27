@@ -6,6 +6,6 @@ import java.util.UUID;
 public interface IncomeRepository {
     Income save(Income income);
     Income findById(UUID id);
-    List<Income> findAll();
+    List<IncomeResponseDTO> findAll();
     void deleteById(UUID id);
 }
