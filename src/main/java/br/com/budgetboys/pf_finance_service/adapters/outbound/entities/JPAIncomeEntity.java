@@ -38,11 +38,4 @@ public class JPAIncomeEntity {
     @Column(name = "user_id", nullable = false)
     private UUID userId;
 
-    public JPAIncomeEntity(Income income) {
-        this.id = income.getId();
-        this.amount = income.getAmount();
-        this.category = income.getCategory();
-        this.creationDate = income.getCreationDate();
-        this.userId = income.getUserId();
-    }
 }
