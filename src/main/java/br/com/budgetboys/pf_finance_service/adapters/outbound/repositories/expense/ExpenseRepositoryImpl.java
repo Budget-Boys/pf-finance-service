@@ -31,7 +31,9 @@ public class ExpenseRepositoryImpl implements ExpenseRepository {
 
     @Override
     public Expense findById(UUID id) {
-        return null;
+        return jpaExpenseRepository.findById(id)
+            .map(expenseMapper::jpaToExpense)
+            .orElse(null);
     }
 
     @Override
