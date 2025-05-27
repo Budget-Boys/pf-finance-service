@@ -43,7 +43,7 @@ public class IncomeService {
         return this.incomeMapper.toResponseDto(income);
     }
 
-    public List<Income> getAllIncomes(){
+    public List<IncomeResponseDTO> findAllIncomes(){
         return incomeRepository.findAll();
     }
 
