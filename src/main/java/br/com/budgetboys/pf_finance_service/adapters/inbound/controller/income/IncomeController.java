@@ -47,4 +47,16 @@ public class IncomeController {
     public ResponseEntity<List<IncomeResponseDTO>> findAll() {
         return ResponseEntity.ok().body(this.incomeService.findAllIncomes());
     }
+
+    @DeleteMapping("delete")
+    public ResponseEntity<?> deleteIncome(@RequestParam UUID id) {
+        try {
+            this.incomeService.deleteIncome(id);
+            return ResponseEntity.ok().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+    }
 }
