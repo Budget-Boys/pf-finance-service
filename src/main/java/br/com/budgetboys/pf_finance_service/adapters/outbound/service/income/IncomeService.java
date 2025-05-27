@@ -35,12 +35,12 @@ public class IncomeService {
         return incomeMapper.toResponseDto(jpaIncomeEntity);
     }
 
-    public Income findIncomeById(UUID id){
+    public IncomeResponseDTO findIncomeById(UUID id){
         Income income = incomeRepository.findById(id);
         if(income == null){
             throw new IllegalArgumentException("Income Id: " +id+ "not found");
         }
-        return income;
+        return this.incomeMapper.toResponseDto(income);
     }
 
     public List<Income> getAllIncomes(){
