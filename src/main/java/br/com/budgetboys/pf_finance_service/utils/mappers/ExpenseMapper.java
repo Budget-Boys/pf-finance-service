@@ -11,7 +11,7 @@ import org.mapstruct.Mappings;
 @Mapper(componentModel = "spring") 
 public interface ExpenseMapper {
 
-    @Mappings({
+     @Mappings({
         @Mapping(target = "id", ignore = true),
         @Mapping(source = "expenseCreateDTO.amount", target = "amount"),
         @Mapping(source = "expenseCreateDTO.category", target = "category"),
@@ -20,4 +20,12 @@ public interface ExpenseMapper {
     })
     Expense expenseCreateDtoToDomain(ExpenseCreateDTO expenseCreateDTO);
 
+    @Mappings({
+        @Mapping(source = "expense.id", target = "id"),
+        @Mapping(source = "expense.amount", target = "amount"),
+        @Mapping(source = "expense.category", target = "category"),
+        @Mapping(source = "expense.creationDate", target = "creationDate"),
+        @Mapping(source = "expense.userId", target = "userId")
+    })
+    ExpenseResponseDTO expenseToResponseDto(Expense expense);
 }
