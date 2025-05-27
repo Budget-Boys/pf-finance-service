@@ -26,8 +26,9 @@ public class IncomeRepositoryImpl implements IncomeRepository {
 
     @Override
     public Income save(Income income) {
-        JPAIncomeEntity incomeEntity = new JPAIncomeEntity(income);
-        return this.incomeMapper.jpaToIncome(this.jpaIncomeRepository.save(incomeEntity));
+        JPAIncomeEntity incomeEntity = incomeMapper.incomeToJpa(income);
+        JPAIncomeEntity savedEntity = jpaIncomeRepository.save(incomeEntity);
+        return incomeMapper.jpaToIncome(savedEntity);
     }
 
     @Override
