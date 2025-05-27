@@ -28,4 +28,14 @@ public interface ExpenseMapper {
         @Mapping(source = "expense.userId", target = "userId")
     })
     ExpenseResponseDTO expenseToResponseDto(Expense expense);
+
+    @Mappings({
+        @Mapping(source = "jpa.id", target = "id"),
+        @Mapping(source = "jpa.amount", target = "amount"),
+        @Mapping(source = "jpa.category", target = "category"),
+        @Mapping(source = "jpa.creationDate", target = "creationDate"),
+        @Mapping(source = "jpa.userId", target = "userId")
+    })
+    Expense jpaToExpense(JPAExpenseEntity jpa);
+    
 }
