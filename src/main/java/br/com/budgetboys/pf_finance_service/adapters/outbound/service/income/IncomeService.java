@@ -30,11 +30,11 @@ public class IncomeService {
             throw new IllegalArgumentException("The income amount cannot be negative");
         }
 
-        Income incomeEntity = this.incomeMapper.toEntity(income);
+        Income incomeEntity = this.incomeMapper.requestToEntity(income);
 
         Income jpaIncomeEntity = this.incomeRepository.save(incomeEntity);
 
-        return this.incomeMapper.toResponseDto(jpaIncomeEntity);
+        return this.incomeMapper.entityToResponse(jpaIncomeEntity);
     }
 
     public IncomeResponseDTO findIncomeById(UUID id){
@@ -42,7 +42,7 @@ public class IncomeService {
         if(income == null){
             throw new IllegalArgumentException("Income Id: " +id+ "not found");
         }
-        return this.incomeMapper.toResponseDto(income);
+        return this.incomeMapper.entityToResponse(income);
     }
 
     public List<IncomeResponseDTO> findAllIncomes(){
