@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper(componentModel = "spring") 
+@Mapper(componentModel = "spring")
 public interface ExpenseMapper {
 
      @Mappings({
@@ -18,7 +18,7 @@ public interface ExpenseMapper {
         @Mapping(target = "creationDate", ignore = true),
         @Mapping(source = "expenseCreateDTO.userId", target = "userId")
     })
-    Expense expenseCreateDtoToDomain(ExpenseCreateDTO expenseCreateDTO);
+    Expense requestToEntity(ExpenseCreateDTO expenseCreateDTO);
 
     @Mappings({
         @Mapping(source = "expense.id", target = "id"),
@@ -27,7 +27,7 @@ public interface ExpenseMapper {
         @Mapping(source = "expense.creationDate", target = "creationDate"),
         @Mapping(source = "expense.userId", target = "userId")
     })
-    ExpenseResponseDTO expenseToResponseDto(Expense expense);
+    ExpenseResponseDTO entityToResponse(Expense expense);
 
     @Mappings({
         @Mapping(source = "jpa.id", target = "id"),
@@ -36,7 +36,7 @@ public interface ExpenseMapper {
         @Mapping(source = "jpa.creationDate", target = "creationDate"),
         @Mapping(source = "jpa.userId", target = "userId")
     })
-    Expense jpaToExpense(JPAExpenseEntity jpa);
+    Expense jpaToEntity(JPAExpenseEntity jpa);
 
      @Mappings({
         @Mapping(source = "expense.id", target = "id"),
@@ -46,4 +46,13 @@ public interface ExpenseMapper {
         @Mapping(source = "expense.userId", target = "userId")
     })
     JPAExpenseEntity expenseToJpa(Expense expense);
+
+    @Mappings({
+            @Mapping(source = "jpaExpenseEntity.id", target = "id"),
+            @Mapping(source = "jpaExpenseEntity.amount", target = "amount"),
+            @Mapping(source = "jpaExpenseEntity.category", target = "category"),
+            @Mapping(source = "jpaExpenseEntity.creationDate", target = "creationDate"),
+            @Mapping(source = "jpaExpenseEntity.userId", target = "userId")
+    })
+     ExpenseResponseDTO jpaToResponse(JPAExpenseEntity jpaExpenseEntity);
 }
