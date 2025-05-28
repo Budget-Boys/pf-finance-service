@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import br.com.budgetboys.pf_finance_service.domain.expense.ExpenseCreateDTO;
 import br.com.budgetboys.pf_finance_service.domain.expense.ExpenseResponseDTO;
 import br.com.budgetboys.pf_finance_service.utils.mappers.ExpenseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +25,15 @@ public class ExpenseService {
         this.expenseRepository = expenseRepository;
     }
 
-    public ExpenseResponseDTO saveExpense(Expense expense){
-        if(expense.getAmount() < 0){
+    public ExpenseResponseDTO saveExpense(ExpenseCreateDTO expenseCreateDTO){
+        if(expenseCreateDTO.getAmount() < 0){
             throw new IllegalArgumentException("The expense amount cannot be negative");
         }
 
-        Expense expenseEntity = this.expenseRepository.save(expense);
+        Expense expenseEntity = this.expenseMapper.requestToEntity(expenseCreateDTO);
+        Expense savedEntity = this.expenseRepository.save(expenseEntity);
 
-        return this.expenseMapper.entityToResponse(expenseEntity);
+        return this.expenseMapper.entityToResponse(savedEntity);
     }
 
     public ExpenseResponseDTO findExpenseById(UUID id){
