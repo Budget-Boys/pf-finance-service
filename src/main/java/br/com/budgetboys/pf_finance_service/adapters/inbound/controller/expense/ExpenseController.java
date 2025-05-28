@@ -47,4 +47,9 @@ public class ExpenseController {
     public ResponseEntity<List<ExpenseResponseDTO>> findAll() {
         return ResponseEntity.ok(this.expenseService.findAll());
     }
+
+    @DeleteMapping("delete")
+    public void delete(UUID id){
+        this.expenseService.deleteExpense(id);
+    }
 }
