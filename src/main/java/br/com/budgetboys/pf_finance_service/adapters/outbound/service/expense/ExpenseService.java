@@ -40,7 +40,7 @@ public class ExpenseService {
             throw new IllegalArgumentException("Expense Id: "+id+ " not found");
         }
         return this.expenseMapper.entityToResponse(expense);
-    }x''
+    }
 
     public List<ExpenseResponseDTO> getAllExpenses(){
        return this.expenseRepository.findAll().stream().map(this.expenseMapper::entityToResponse).collect(Collectors.toList());
