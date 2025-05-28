@@ -18,7 +18,7 @@ public interface IncomeMapper {
             @Mapping(target = "creationDate", ignore = true),
             @Mapping(source = "incomeCreateDTO.userId", target = "userId")
     })
-    Income toEntity(IncomeCreateDTO incomeCreateDTO);
+    Income requestToEntity(IncomeCreateDTO incomeCreateDTO);
 
     @Mappings({
             @Mapping(source = "incomeEntity.id", target = "id"),
@@ -27,7 +27,7 @@ public interface IncomeMapper {
             @Mapping(source = "incomeEntity.creationDate", target = "creationDate"),
             @Mapping(source = "incomeEntity.userId", target = "userId")
     })
-    IncomeResponseDTO toResponseDto(Income incomeEntity);
+    IncomeResponseDTO entityToResponse(Income incomeEntity);
 
     @Mappings({
             @Mapping(source = "jpaIncomeEntity.id", target = "id"),
@@ -36,7 +36,7 @@ public interface IncomeMapper {
             @Mapping(source = "jpaIncomeEntity.creationDate", target = "creationDate"),
             @Mapping(source = "jpaIncomeEntity.userId", target = "userId")
     })
-    Income jpaToIncome(JPAIncomeEntity jpaIncomeEntity);
+    Income jpaToEntity(JPAIncomeEntity jpaIncomeEntity);
 
      @Mappings({
         @Mapping(source = "income.id", target = "id"),
@@ -45,7 +45,7 @@ public interface IncomeMapper {
         @Mapping(source = "income.creationDate", target = "creationDate"),
         @Mapping(source = "income.userId", target = "userId")
     })
-    JPAIncomeEntity incomeToJpa(Income income);
+    JPAIncomeEntity entityToJpa(Income income);
 
      @Mappings({
              @Mapping(source = "jpaIncomeEntity.id", target = "id"),
@@ -54,5 +54,5 @@ public interface IncomeMapper {
              @Mapping(source = "jpaIncomeEntity.creationDate", target = "creationDate"),
              @Mapping(source = "jpaIncomeEntity.userId", target = "userId")
      })
-     IncomeResponseDTO jpaToResponseDto(JPAIncomeEntity jpaIncomeEntity);
+     IncomeResponseDTO jpaToResponse(JPAIncomeEntity jpaIncomeEntity);
 }
