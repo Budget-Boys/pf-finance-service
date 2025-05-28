@@ -6,6 +6,7 @@ import java.util.UUID;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeCreateDTO;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeResponseDTO;
 import br.com.budgetboys.pf_finance_service.utils.mappers.IncomeMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.budgetboys.pf_finance_service.domain.income.Income;
@@ -16,6 +17,7 @@ public class IncomeService {
 
     private final IncomeRepository incomeRepository;
 
+    @Autowired
     private IncomeMapper incomeMapper;
 
     public IncomeService (IncomeRepository incomeRepository){
@@ -28,15 +30,15 @@ public class IncomeService {
             throw new IllegalArgumentException("The income amount cannot be negative");
         }
 
-        Income incomeEntity = incomeMapper.toEntity(income);
+        Income incomeEntity = this.incomeMapper.toEntity(income);
 
-        Income jpaIncomeEntity = incomeRepository.save(incomeEntity);
+        Income jpaIncomeEntity = this.incomeRepository.save(incomeEntity);
 
-        return incomeMapper.toResponseDto(jpaIncomeEntity);
+        return this.incomeMapper.toResponseDto(jpaIncomeEntity);
     }
 
     public IncomeResponseDTO findIncomeById(UUID id){
-        Income income = incomeRepository.findById(id);
+        Income income = this.incomeRepository.findById(id);
         if(income == null){
             throw new IllegalArgumentException("Income Id: " +id+ "not found");
         }
@@ -44,10 +46,10 @@ public class IncomeService {
     }
 
     public List<IncomeResponseDTO> findAllIncomes(){
-        return incomeRepository.findAll();
+        return this.incomeRepository.findAll();
     }
 
     public void deleteIncome(UUID id){
-        incomeRepository.deleteById(id);
+        this.incomeRepository.deleteById(id);
     }
 }
