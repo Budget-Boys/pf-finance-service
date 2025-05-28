@@ -44,7 +44,7 @@ public class ExpenseService {
         return this.expenseMapper.entityToResponse(expense);
     }
 
-    public List<ExpenseResponseDTO> getAllExpenses(){
+    public List<ExpenseResponseDTO> findAll(){
        return this.expenseRepository.findAll().stream().map(this.expenseMapper::entityToResponse).collect(Collectors.toList());
     }
 
