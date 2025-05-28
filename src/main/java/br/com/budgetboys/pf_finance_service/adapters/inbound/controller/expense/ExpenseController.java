@@ -6,6 +6,7 @@ import br.com.budgetboys.pf_finance_service.domain.expense.ExpenseResponseDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -40,5 +41,10 @@ public class ExpenseController {
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
+    }
+
+    @GetMapping("findall")
+    public ResponseEntity<List<ExpenseResponseDTO>> findAll() {
+        return ResponseEntity.ok(this.expenseService.findAll());
     }
 }
