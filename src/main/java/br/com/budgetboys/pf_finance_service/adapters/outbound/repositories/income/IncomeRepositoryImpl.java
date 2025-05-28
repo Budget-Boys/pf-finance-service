@@ -28,20 +28,20 @@ public class IncomeRepositoryImpl implements IncomeRepository {
 
     @Override
     public Income save(Income income) {
-        JPAIncomeEntity incomeEntity = this.incomeMapper.incomeToJpa(income);
+        JPAIncomeEntity incomeEntity = this.incomeMapper.entityToJpa(income);
         JPAIncomeEntity savedEntity = this.jpaIncomeRepository.save(incomeEntity);
-        return this.incomeMapper.jpaToIncome(savedEntity);
+        return this.incomeMapper.jpaToEntity(savedEntity);
     }
 
     @Override
     public Income findById(UUID id) {
         Optional<JPAIncomeEntity> incomeEntity = this.jpaIncomeRepository.findById(id);
-        return incomeEntity.map(this.incomeMapper::jpaToIncome).orElse(null);
+        return incomeEntity.map(this.incomeMapper::jpaToEntity).orElse(null);
     }
 
     @Override
     public List<IncomeResponseDTO> findAll() {
-        return this.jpaIncomeRepository.findAll().stream().map(this.incomeMapper::jpaToResponseDto).collect(Collectors.toList());
+        return this.jpaIncomeRepository.findAll().stream().map(this.incomeMapper::jpaToResponse).collect(Collectors.toList());
 
     }
 
