@@ -2,7 +2,11 @@ package br.com.budgetboys.pf_finance_service.adapters.outbound.service.expense;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
+import br.com.budgetboys.pf_finance_service.domain.expense.ExpenseResponseDTO;
+import br.com.budgetboys.pf_finance_service.utils.mappers.ExpenseMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.budgetboys.pf_finance_service.domain.expense.Expense;
@@ -13,30 +17,36 @@ public class ExpenseService {
 
     private final ExpenseRepository expenseRepository;
 
+    @Autowired
+    private ExpenseMapper expenseMapper;
+
     public ExpenseService (ExpenseRepository expenseRepository){
         this.expenseRepository = expenseRepository;
     }
 
-    public Expense saveExpense(Expense expense){
+    public ExpenseResponseDTO saveExpense(Expense expense){
         if(expense.getAmount() < 0){
             throw new IllegalArgumentException("The expense amount cannot be negative");
         }
-        return expenseRepository.save(expense);
+
+        Expense expenseEntity = this.expenseRepository.save(expense);
+
+        return this.expenseMapper.entityToResponse(expenseEntity);
     }
 
-    public Expense findExpenseById(UUID id){
-        Expense expense = expenseRepository.findById(id);
+    public ExpenseResponseDTO findExpenseById(UUID id){
+        Expense expense = this.expenseRepository.findById(id);
         if(expense == null) {
             throw new IllegalArgumentException("Expense Id: "+id+ " not found");
         }
-        return expense;                       
-    }
+        return this.expenseMapper.entityToResponse(expense);
+    }x''
 
-    public List<Expense> getAllExpenses(){
-       return expenseRepository.findAll(); 
+    public List<ExpenseResponseDTO> getAllExpenses(){
+       return this.expenseRepository.findAll().stream().map(this.expenseMapper::entityToResponse).collect(Collectors.toList());
     }
 
     public void deleteExpense(UUID id){
-        expenseRepository.deleteById(id);
+        this.expenseRepository.deleteById(id);
     }
 }
