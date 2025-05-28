@@ -5,6 +5,7 @@ import br.com.budgetboys.pf_finance_service.domain.expense.Expense;
 import br.com.budgetboys.pf_finance_service.domain.expense.ExpenseRepository;
 import br.com.budgetboys.pf_finance_service.utils.mappers.ExpenseMapper;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class ExpenseRepositoryImpl implements ExpenseRepository {
 
     private final JPAExpenseRepository jpaExpenseRepository;
 
+    @Autowired
     private final ExpenseMapper expenseMapper;
 
     public ExpenseRepositoryImpl(JPAExpenseRepository jpaExpenseRepository, ExpenseMapper expenseMapper) {
@@ -25,25 +27,26 @@ public class ExpenseRepositoryImpl implements ExpenseRepository {
 
     @Override
     public Expense save(Expense expense) {
-        JPAExpenseEntity expenseEntity = expenseMapper.expenseToJpa(expense);
-        JPAExpenseEntity savedEntity = jpaExpenseRepository.save(expenseEntity);
-        return expenseMapper.jpaToExpense(savedEntity);
+        JPAExpenseEntity expenseEntity = this.expenseMapper.expenseToJpa(expense);
+        JPAExpenseEntity savedEntity = this.jpaExpenseRepository.save(expenseEntity);
+
+        return this.expenseMapper.jpaToEntity(savedEntity);
     }
 
     @Override
     public Expense findById(UUID id) {
         return jpaExpenseRepository.findById(id)
-            .map(expenseMapper::jpaToExpense)
+            .map(expenseMapper::jpaToEntity)
             .orElse(null);
     }
 
     @Override
     public List<Expense> findAll() {
-        return jpaExpenseRepository.findAll().stream().map(expenseMapper::jpaToExpense).collect(Collectors.toList());
+        return this.jpaExpenseRepository.findAll().stream().map(expenseMapper::jpaToEntity).collect(Collectors.toList());
     }
 
     @Override
     public void deleteById(UUID id) {
-        jpaExpenseRepository.deleteById(id);
+        this.jpaExpenseRepository.deleteById(id);
     }
 }
