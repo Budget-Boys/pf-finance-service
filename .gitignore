@@ -33,8 +33,3 @@ build/
 .vscode/
 
 .env
-
-/src/main/resources/application.properties
-
-### Docker ###
-compose.yaml
