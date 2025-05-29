@@ -15,6 +15,5 @@ public class ExpenseResponseDTO {
     private double amount;
     private ExpenseCategory category;
     private Date creationDate;
-    private UUID userId;
 
 }
