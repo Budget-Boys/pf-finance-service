@@ -35,7 +35,7 @@ public class JPAIncomeEntity {
     @Column(name = "creation_date", nullable = false, updatable = false)
     private Date creationDate;
 
-    @Column(name = "user_id", nullable = false)
-    private UUID userId;
-
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private JPAUserEntity user;
 }

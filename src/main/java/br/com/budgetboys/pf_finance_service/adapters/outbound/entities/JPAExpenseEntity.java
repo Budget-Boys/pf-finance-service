@@ -2,6 +2,7 @@ package br.com.budgetboys.pf_finance_service.adapters.outbound.entities;
 
 import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.enums.ExpenseCategory;
 import br.com.budgetboys.pf_finance_service.domain.expense.Expense;
+import br.com.budgetboys.pf_finance_service.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,7 +36,7 @@ public class JPAExpenseEntity {
     @Column(name = "creation_date", nullable = false, updatable = false)
     private Date creationDate;
 
-    @Column(name = "user_id", nullable = false)
-    private UUID userId;
-
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private JPAUserEntity user;
 }
