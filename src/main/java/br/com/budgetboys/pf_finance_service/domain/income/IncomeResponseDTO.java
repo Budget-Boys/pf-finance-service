@@ -15,6 +15,7 @@ public class IncomeResponseDTO {
     private double amount;
     private IncomeCategory category;
     private Date creationDate;
+    private UUID userId;
 
 }
 

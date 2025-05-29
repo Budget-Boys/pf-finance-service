@@ -16,4 +16,6 @@ public class ExpenseCreateDTO {
     @NotNull(message = "The category cannot be null")
     private ExpenseCategory category;
 
+    private UUID userId;
+
 }
