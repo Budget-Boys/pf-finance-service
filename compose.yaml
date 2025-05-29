@@ -1,0 +1,36 @@
+services:
+  pf-finance-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pf-finance-service
+    ports:
+      - "${SPRING_PORT}:${SPRING_PORT}"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+    command: ["java", "-jar", "app.jar"]
+
+  mysql:
+    image: mysql:8.0
+    container_name: pf-finance-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mysql_data:
