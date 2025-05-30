@@ -3,6 +3,7 @@ package br.com.budgetboys.pf_finance_service.adapters.inbound.controller.income;
 import br.com.budgetboys.pf_finance_service.adapters.outbound.service.income.IncomeService;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeCreateDTO;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeResponseDTO;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class IncomeController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody IncomeCreateDTO income) {
+    public ResponseEntity<?> create(@Valid @RequestBody IncomeCreateDTO income) {
         try {
             IncomeResponseDTO savedIncome = this.incomeService.saveIncome(income);
             return ResponseEntity.ok(savedIncome);

@@ -3,6 +3,7 @@ package br.com.budgetboys.pf_finance_service.adapters.inbound.controller.expense
 import br.com.budgetboys.pf_finance_service.adapters.outbound.service.expense.ExpenseService;
 import br.com.budgetboys.pf_finance_service.domain.expense.ExpenseCreateDTO;
 import br.com.budgetboys.pf_finance_service.domain.expense.ExpenseResponseDTO;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class ExpenseController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody ExpenseCreateDTO expenseCreateDTO) {
+    public ResponseEntity<?> create(@Valid @RequestBody ExpenseCreateDTO expenseCreateDTO) {
         try {
             ExpenseResponseDTO savedExpense = this.expenseService.saveExpense(expenseCreateDTO);
             return ResponseEntity.ok(savedExpense);
