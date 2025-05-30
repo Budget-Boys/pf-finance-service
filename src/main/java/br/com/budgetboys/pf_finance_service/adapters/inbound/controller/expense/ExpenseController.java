@@ -19,7 +19,7 @@ public class ExpenseController {
         this.expenseService = expenseService;
     }
 
-    @PostMapping("create")
+    @PostMapping
     public ResponseEntity<?> create(@RequestBody ExpenseCreateDTO expenseCreateDTO) {
         try {
             ExpenseResponseDTO savedExpense = this.expenseService.saveExpense(expenseCreateDTO);
