@@ -49,7 +49,14 @@ public class ExpenseController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable UUID id) {
-        this.expenseService.deleteExpense(id);
+    public ResponseEntity<?> delete(@PathVariable UUID id) {
+        try {
+            this.expenseService.deleteExpense(id);
+            return ResponseEntity.ok().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
     }
 }
