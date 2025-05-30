@@ -50,6 +50,12 @@ public class IncomeService {
     }
 
     public void deleteIncome(UUID id){
-        this.incomeRepository.deleteById(id);
+        Income  income = this.incomeRepository.findById(id);
+
+        if(income == null){
+            throw new IllegalArgumentException("Income Id: " +id+ "not found");
+        }
+
+        this.incomeRepository.delete(income);
     }
 }

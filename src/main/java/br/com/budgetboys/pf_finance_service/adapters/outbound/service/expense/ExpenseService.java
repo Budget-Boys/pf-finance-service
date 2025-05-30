@@ -45,10 +45,19 @@ public class ExpenseService {
     }
 
     public List<ExpenseResponseDTO> findAll(){
-       return this.expenseRepository.findAll().stream().map(this.expenseMapper::entityToResponse).collect(Collectors.toList());
+       return this.expenseRepository.findAll()
+               .stream()
+               .map(this.expenseMapper::entityToResponse)
+               .collect(Collectors.toList());
     }
 
     public void deleteExpense(UUID id){
-        this.expenseRepository.deleteById(id);
+        Expense expense = this.expenseRepository.findById(id);
+
+        if(expense == null) {
+            throw new IllegalArgumentException("Expense Id: "+id+ " not found");
+        }
+
+        this.expenseRepository.delete(expense);
     }
 }
