@@ -46,7 +46,8 @@ public class IncomeRepositoryImpl implements IncomeRepository {
     }
 
     @Override
-    public void deleteById(UUID id) {
-        this.jpaIncomeRepository.deleteById(id);
+    public void delete(Income income) {
+        JPAIncomeEntity jpaIncomeEntity = this.incomeMapper.entityToJpa(income);
+        this.jpaIncomeRepository.delete(jpaIncomeEntity);
     }
 }

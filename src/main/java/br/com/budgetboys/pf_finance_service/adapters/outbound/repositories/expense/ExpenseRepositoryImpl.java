@@ -46,7 +46,8 @@ public class ExpenseRepositoryImpl implements ExpenseRepository {
     }
 
     @Override
-    public void deleteById(UUID id) {
-        this.jpaExpenseRepository.deleteById(id);
+    public void delete(Expense expense) {
+        JPAExpenseEntity jpaExpenseEntity = this.expenseMapper.expenseToJpa(expense);
+        this.jpaExpenseRepository.delete(jpaExpenseEntity);
     }
 }
