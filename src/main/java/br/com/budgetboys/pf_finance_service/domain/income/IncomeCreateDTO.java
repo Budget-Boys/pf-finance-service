@@ -16,6 +16,4 @@ public class IncomeCreateDTO {
     @NotNull(message = "The category cannot be null")
     private IncomeCategory category;
 
-    private UUID userId;
-
 }
