@@ -31,8 +31,8 @@ public class ExpenseController {
         }
     }
 
-    @GetMapping("find")
-    public ResponseEntity<?> find(@RequestParam UUID id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> find(@PathVariable UUID id) {
         try {
             ExpenseResponseDTO expense = this.expenseService.findExpenseById(id);
             return ResponseEntity.ok(expense);
@@ -43,13 +43,13 @@ public class ExpenseController {
         }
     }
 
-    @GetMapping("findall")
+    @GetMapping("")
     public ResponseEntity<List<ExpenseResponseDTO>> findAll() {
         return ResponseEntity.ok(this.expenseService.findAll());
     }
 
-    @DeleteMapping("delete")
-    public void delete(UUID id){
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable UUID id) {
         this.expenseService.deleteExpense(id);
     }
 }

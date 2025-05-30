@@ -19,7 +19,7 @@ public class IncomeController {
         this.incomeService = incomeService;
     }
 
-    @PostMapping("create")
+    @PostMapping
     public ResponseEntity<?> create(@RequestBody IncomeCreateDTO income) {
         try {
             IncomeResponseDTO savedIncome = this.incomeService.saveIncome(income);
@@ -31,8 +31,8 @@ public class IncomeController {
         }
     }
 
-    @GetMapping("find")
-    public ResponseEntity<?> findById(@RequestParam UUID id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable UUID id) {
         try {
             IncomeResponseDTO incomeResponse = this.incomeService.findIncomeById(id);
             return ResponseEntity.ok(incomeResponse);
@@ -43,13 +43,13 @@ public class IncomeController {
         }
     }
 
-    @GetMapping("findall")
+    @GetMapping
     public ResponseEntity<List<IncomeResponseDTO>> findAll() {
         return ResponseEntity.ok().body(this.incomeService.findAllIncomes());
     }
 
-    @DeleteMapping("delete")
-    public ResponseEntity<?> deleteIncome(@RequestParam UUID id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteIncome(@PathVariable UUID id) {
         try {
             this.incomeService.deleteIncome(id);
             return ResponseEntity.ok().build();
