@@ -40,8 +40,8 @@ public class IncomeRepositoryImpl implements IncomeRepository {
     }
 
     @Override
-    public List<IncomeResponseDTO> findAll() {
-        return this.jpaIncomeRepository.findAll().stream().map(this.incomeMapper::jpaToResponse).collect(Collectors.toList());
+    public List<Income> findAll() {
+        return this.jpaIncomeRepository.findAll().stream().map(this.incomeMapper::jpaToEntity).collect(Collectors.toList());
 
     }
 
