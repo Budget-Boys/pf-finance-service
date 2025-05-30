@@ -2,6 +2,7 @@ package br.com.budgetboys.pf_finance_service.adapters.outbound.service.income;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeCreateDTO;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeResponseDTO;
@@ -46,7 +47,7 @@ public class IncomeService {
     }
 
     public List<IncomeResponseDTO> findAllIncomes(){
-        return this.incomeRepository.findAll();
+        return this.incomeRepository.findAll().stream().map(this.incomeMapper::entityToResponse).collect(Collectors.toList());
     }
 
     public void deleteIncome(UUID id){
