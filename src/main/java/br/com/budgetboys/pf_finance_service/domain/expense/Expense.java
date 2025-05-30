@@ -1,6 +1,7 @@
 package br.com.budgetboys.pf_finance_service.domain.expense;
 
 import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.enums.ExpenseCategory;
+import br.com.budgetboys.pf_finance_service.domain.user.User;
 
 import java.util.Date;
 import java.util.UUID;
@@ -11,12 +12,13 @@ public class Expense {
     private double amount;
     private ExpenseCategory category;
     private Date creationDate;
-    private UUID userId;
+    private User user;
 
-    public Expense(UUID id, double amount, ExpenseCategory category) {
+    public Expense(UUID id, double amount, ExpenseCategory category, User user) {
         this.id = id;
         this.amount = amount;
         this.category = category;
+        this.user = user;
     }
 
     public UUID getId() {
@@ -51,11 +53,11 @@ public class Expense {
         this.creationDate = creationDate;
     }
 
-    public UUID getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
