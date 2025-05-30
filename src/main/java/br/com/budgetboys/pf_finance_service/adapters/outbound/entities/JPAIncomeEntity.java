@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 import java.util.UUID;
@@ -30,17 +31,11 @@ public class JPAIncomeEntity {
     @Column(name = "income_category", nullable = false)
     private IncomeCategory category;
 
-    @Column(name = "creation_date", nullable = false)
+    @CreationTimestamp
+    @Column(name = "creation_date", nullable = false, updatable = false)
     private Date creationDate;
 
     @Column(name = "user_id", nullable = false)
     private UUID userId;
 
-    public JPAIncomeEntity(Income income) {
-        this.id = income.getId();
-        this.amount = income.getAmount();
-        this.category = income.getCategory();
-        this.creationDate = income.getCreationDate();
-        this.userId = income.getUserId();
-    }
 }
