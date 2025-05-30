@@ -1,6 +1,7 @@
 package br.com.budgetboys.pf_finance_service.domain.expense;
 
 import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.enums.ExpenseCategory;
+import br.com.budgetboys.pf_finance_service.domain.user.UserResponseDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ public class ExpenseResponseDTO {
     private double amount;
     private ExpenseCategory category;
     private Date creationDate;
-    private UUID userId;
+
+    private UserResponseDTO user;
 
 }
