@@ -33,7 +33,7 @@ public class ExpenseController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> find(@PathVariable UUID id) {
+    public ResponseEntity<?> findById(@PathVariable UUID id) {
         try {
             ExpenseResponseDTO expense = this.expenseService.findExpenseById(id);
             return ResponseEntity.ok(expense);
