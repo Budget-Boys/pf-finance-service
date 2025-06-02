@@ -91,4 +91,13 @@ class ExpenseServiceTest {
         verify(expenseRepository).findById(expenseId);
         verify(expenseMapper).entityToResponse(expense);
     }
+
+    @Test
+    void shouldThrownWhenExpenseNotFound() {
+        when(expenseRepository.findById(expenseId)).thenReturn(null);
+
+        assertThrows(IllegalArgumentException.class, () -> expenseService.findExpenseById(expenseId));
+        verify(expenseRepository).findById(expenseId);
+        verifyNoMoreInteractions(expenseMapper);
+    }
 }
