@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -99,5 +100,22 @@ class ExpenseServiceTest {
         assertThrows(IllegalArgumentException.class, () -> expenseService.findExpenseById(expenseId));
         verify(expenseRepository).findById(expenseId);
         verifyNoMoreInteractions(expenseMapper);
+    }
+
+    @Test
+    void shouldFoundAllExpenses(){
+        List<Expense> expenses = List.of(expense);
+        List<Expense> expectedExpenses = List.of(expense);
+
+        when(expenseRepository.findAll()).thenReturn(expenses);
+        when(expenseMapper.entityToResponse(expense)).thenReturn(responseDTO);
+
+        List<ExpenseResponseDTO> result = expenseService.findAll();
+
+        assertEquals(expectedExpenses.size(), result.size(), "Expenses should match");
+        assertEquals(expectedExpenses.getFirst().getId(), result.getFirst().getId(), "Expenses should match");
+
+        verify(expenseRepository).findAll();
+        verify(expenseMapper).entityToResponse(expense);
     }
 }
