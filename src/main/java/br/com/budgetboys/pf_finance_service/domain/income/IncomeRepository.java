@@ -7,5 +7,5 @@ public interface IncomeRepository {
     Income save(Income income);
     Income findById(UUID id);
     List<Income> findAll();
-    void deleteById(UUID id);
+    void delete(Income income);
 }

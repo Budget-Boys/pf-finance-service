@@ -7,5 +7,5 @@ public interface ExpenseRepository {
     Expense save(Expense expense);
     Expense findById(UUID id);
     List<Expense> findAll();
-    void deleteById(UUID id);
+    void delete(Expense expense);
 }
