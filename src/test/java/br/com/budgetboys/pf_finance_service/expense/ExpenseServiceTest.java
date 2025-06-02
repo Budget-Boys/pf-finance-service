@@ -118,4 +118,12 @@ class ExpenseServiceTest {
         verify(expenseRepository).findAll();
         verify(expenseMapper).entityToResponse(expense);
     }
+
+    @Test
+    void shouldDeleteExpense(){
+        when(expenseRepository.findById(expenseId)).thenReturn(expense);
+
+        assertDoesNotThrow(() -> expenseService.deleteExpense(expenseId));
+        verify(expenseRepository, times(1)).delete(expense);
+    }
 }
