@@ -126,4 +126,12 @@ class ExpenseServiceTest {
         assertDoesNotThrow(() -> expenseService.deleteExpense(expenseId));
         verify(expenseRepository, times(1)).delete(expense);
     }
+
+    @Test
+    void shouldThrowWhenDeletingNonexistentExpense() {
+        when(expenseRepository.findById(expenseId)).thenReturn(null);
+
+        assertThrows(IllegalArgumentException.class, () -> expenseService.deleteExpense(expenseId));
+        verify(expenseRepository, never()).delete(any());
+    }
 }
