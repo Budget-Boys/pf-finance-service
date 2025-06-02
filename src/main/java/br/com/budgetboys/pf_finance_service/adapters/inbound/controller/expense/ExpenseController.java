@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("expense")
+@RequestMapping("expenses")
 public class ExpenseController {
 
     private final ExpenseService expenseService;

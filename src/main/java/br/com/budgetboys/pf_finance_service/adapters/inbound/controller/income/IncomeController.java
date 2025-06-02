@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("income")
+@RequestMapping("incomes")
 public class IncomeController {
 
     private final IncomeService incomeService;
