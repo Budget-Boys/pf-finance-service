@@ -103,7 +103,7 @@ class ExpenseServiceTest {
     }
 
     @Test
-    void shouldFoundAllExpenses(){
+    void shouldFindAllExpenses(){
         List<Expense> expenses = List.of(expense);
         List<Expense> expectedExpenses = List.of(expense);
 
