@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -62,9 +63,9 @@ class ExpenseServiceTest {
 
         ExpenseResponseDTO result = expenseService.saveExpense(createDTO);
 
-            assertNotNull(result);
-            assertEquals(responseDTO.getId(), result.getId());
-            assertEquals(responseDTO.getAmount(), result.getAmount());
+            assertNotNull(result, "Response should not be null");
+            assertEquals(responseDTO.getId(), result.getId(), "Response should have same id");
+            assertEquals(responseDTO.getAmount(), result.getAmount(),  "Response should have same amount");
             verify(expenseRepository).save(expense);
             verify(expenseMapper).requestToEntity(createDTO);
             verify(expenseMapper).entityToResponse(expense);
@@ -74,7 +75,20 @@ class ExpenseServiceTest {
     void shouldThrowWhenAmountIsNegative(){
         ExpenseCreateDTO invalidDTO = new ExpenseCreateDTO(-100.0, ExpenseCategory.FUEL, userId);
 
-        assertThrows(IllegalArgumentException.class, () -> expenseService.saveExpense(invalidDTO));
+        assertThrows(IllegalArgumentException.class, () -> expenseService.saveExpense(invalidDTO), "Expense amount should not be negative");
         verify(expenseRepository, never()).save(expense);
+    }
+
+    @Test
+    void shouldFindExpenseById(){
+        when(expenseRepository.findById(expenseId)).thenReturn(expense);
+        when(expenseMapper.entityToResponse(expense)).thenReturn(responseDTO);
+
+        ExpenseResponseDTO result = expenseService.findExpenseById(expenseId);
+
+        assertNotNull(result, "Response should not be null");
+        assertEquals(expenseId, result.getId(), "Expense Id should match");
+        verify(expenseRepository).findById(expenseId);
+        verify(expenseMapper).entityToResponse(expense);
     }
 }
