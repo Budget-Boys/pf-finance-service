@@ -69,4 +69,12 @@ class ExpenseServiceTest {
             verify(expenseMapper).requestToEntity(createDTO);
             verify(expenseMapper).entityToResponse(expense);
     }
+
+    @Test
+    void shouldThrowWhenAmountIsNegative(){
+        ExpenseCreateDTO invalidDTO = new ExpenseCreateDTO(-100.0, ExpenseCategory.FUEL, userId);
+
+        assertThrows(IllegalArgumentException.class, () -> expenseService.saveExpense(invalidDTO));
+        verify(expenseRepository, never()).save(expense);
+    }
 }
