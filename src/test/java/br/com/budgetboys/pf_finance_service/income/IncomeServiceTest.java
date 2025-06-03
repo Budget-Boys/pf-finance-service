@@ -113,4 +113,20 @@ public class IncomeServiceTest {
         verify(incomeRepository).findAll();
         verify(incomeMapper).entityToResponse(income);
     }
+
+    @Test
+    void shouldDeleteIncome(){
+        when(incomeRepository.findById(incomeId)).thenReturn(income);
+
+        assertDoesNotThrow(() -> incomeService.deleteIncome(incomeId));
+        verify(incomeRepository, times(1)).delete(income);
+    }
+
+    @Test
+    void shouldThrowWhenDeletingNonexistentIncome() {
+        when(incomeRepository.findById(incomeId)).thenReturn(null);
+
+        assertThrows(IllegalArgumentException.class, () -> incomeService.deleteIncome(incomeId));
+        verify(incomeRepository, never()).delete(any());
+    }
 }
