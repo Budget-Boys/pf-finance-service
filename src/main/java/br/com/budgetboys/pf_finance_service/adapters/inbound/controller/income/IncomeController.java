@@ -4,6 +4,7 @@ import br.com.budgetboys.pf_finance_service.adapters.outbound.service.income.Inc
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeCreateDTO;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeResponseDTO;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("income")
+@RequestMapping("incomes")
 public class IncomeController {
 
     private final IncomeService incomeService;
@@ -24,7 +25,7 @@ public class IncomeController {
     public ResponseEntity<?> create(@Valid @RequestBody IncomeCreateDTO income) {
         try {
             IncomeResponseDTO savedIncome = this.incomeService.saveIncome(income);
-            return ResponseEntity.ok(savedIncome);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedIncome);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
