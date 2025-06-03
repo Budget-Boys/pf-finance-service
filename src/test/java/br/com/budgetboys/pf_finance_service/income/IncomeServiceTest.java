@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -82,5 +83,14 @@ public class IncomeServiceTest {
 
         assertThrows(IllegalArgumentException.class, () -> incomeService.saveIncome(invalidDTO));
         verify(incomeRepository, never()).save(income);
+    }
+
+    @Test
+    void shouldThrowWhenIncomeNotFound(){
+        when(incomeRepository.findById(incomeId)).thenReturn(null);
+
+        assertThrows(IllegalArgumentException.class, () -> incomeService.findIncomeById(incomeId));
+        verify(incomeRepository, never()).findById(incomeId);
+        verifyNoMoreInteractions(incomeMapper);
     }
 }
