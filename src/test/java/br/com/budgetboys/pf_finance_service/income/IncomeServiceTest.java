@@ -93,7 +93,7 @@ public class IncomeServiceTest {
         when(incomeRepository.findById(incomeId)).thenReturn(null);
 
         assertThrows(IllegalArgumentException.class, () -> incomeService.findIncomeById(incomeId));
-        verify(incomeRepository, never()).findById(incomeId);
+        verify(incomeRepository).findById(incomeId);
         verifyNoMoreInteractions(incomeMapper);
     }
 
