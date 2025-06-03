@@ -2,6 +2,8 @@ package br.com.budgetboys.pf_finance_service.income;
 
 import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.enums.IncomeCategory;
 import br.com.budgetboys.pf_finance_service.adapters.outbound.service.income.IncomeService;
+import br.com.budgetboys.pf_finance_service.domain.expense.Expense;
+import br.com.budgetboys.pf_finance_service.domain.expense.ExpenseResponseDTO;
 import br.com.budgetboys.pf_finance_service.domain.income.Income;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeCreateDTO;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeRepository;
@@ -14,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -43,7 +46,7 @@ public class IncomeServiceTest {
         userId = UUID.randomUUID();
         incomeId = UUID.randomUUID();
 
-        createDTO = new IncomeCreateDTO();
+        createDTO = new IncomeCreateDTO(100.0, IncomeCategory.FREELANCE, userId);
 
         income = new Income();
         income.setId(incomeId);
@@ -92,5 +95,22 @@ public class IncomeServiceTest {
         assertThrows(IllegalArgumentException.class, () -> incomeService.findIncomeById(incomeId));
         verify(incomeRepository, never()).findById(incomeId);
         verifyNoMoreInteractions(incomeMapper);
+    }
+
+    @Test
+    void shouldFindAllIncomes(){
+        List<Income> incomes = List.of(income);
+        List<Income> expectedIncomes = List.of(income);
+
+        when(incomeRepository.findAll()).thenReturn(incomes);
+        when(incomeMapper.entityToResponse(income)).thenReturn(responseDTO);
+
+        List<IncomeResponseDTO> result = incomeService.findAllIncomes();
+
+        assertEquals(expectedIncomes.size(), result.size(), "Incomes should match");
+        assertEquals(expectedIncomes.getFirst().getId(), result.getFirst().getId(), "Incomes should match");
+
+        verify(incomeRepository).findAll();
+        verify(incomeMapper).entityToResponse(income);
     }
 }
