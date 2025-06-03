@@ -1,5 +1,6 @@
 package br.com.budgetboys.pf_finance_service.income;
 
+import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.enums.IncomeCategory;
 import br.com.budgetboys.pf_finance_service.adapters.outbound.service.income.IncomeService;
 import br.com.budgetboys.pf_finance_service.domain.income.Income;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeCreateDTO;
@@ -15,10 +16,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class IncomeServiceTest {
@@ -75,5 +74,13 @@ public class IncomeServiceTest {
         verify(incomeRepository).save(income);
         verify(incomeMapper).requestToEntity(createDTO);
         verify(incomeMapper).entityToResponse(income);
+    }
+
+    @Test
+    void shouldThrowWhenAmountIsNegative(){
+        IncomeCreateDTO invalidDTO = new IncomeCreateDTO(-100.0, IncomeCategory.FREELANCE, userId);
+
+        assertThrows(IllegalArgumentException.class, () -> incomeService.saveIncome(invalidDTO));
+        verify(incomeRepository, never()).save(income);
     }
 }
