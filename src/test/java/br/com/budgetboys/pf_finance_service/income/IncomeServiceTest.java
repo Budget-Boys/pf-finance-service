@@ -7,12 +7,18 @@ import br.com.budgetboys.pf_finance_service.domain.income.IncomeRepository;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeResponseDTO;
 import br.com.budgetboys.pf_finance_service.utils.mappers.IncomeMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class IncomeServiceTest {
@@ -50,5 +56,24 @@ public class IncomeServiceTest {
         responseDTO.setAmount(income.getAmount());
         responseDTO.setCategory(income.getCategory());
         responseDTO.setUserId(income.getUserId());
+    }
+
+    @Test
+    void shouldSaveIncome(){
+        when(incomeMapper.requestToEntity(createDTO)).thenReturn(income);
+        when(incomeRepository.save(income)).thenReturn(income);
+        when(incomeMapper.entityToResponse(income)).thenReturn(responseDTO);
+
+        IncomeResponseDTO result = incomeService.saveIncome(createDTO);
+
+        assertNotNull(result, "Response should not be null");
+        assertEquals(responseDTO.getId(), result.getId(), "Response should have same id");
+        assertEquals(responseDTO.getAmount(), result.getAmount(), "Response should have same amount");
+        assertEquals(responseDTO.getCategory(), result.getCategory(), "Response should have same category");
+        assertEquals(responseDTO.getUserId(), result.getUserId(), "Response should have same user id");
+
+        verify(incomeRepository).save(income);
+        verify(incomeMapper).requestToEntity(createDTO);
+        verify(incomeMapper).entityToResponse(income);
     }
 }
