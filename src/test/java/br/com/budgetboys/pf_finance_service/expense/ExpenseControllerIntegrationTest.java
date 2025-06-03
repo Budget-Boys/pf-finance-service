@@ -37,6 +37,6 @@ public class ExpenseControllerIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.category").value("FUEL"));
+                .andExpect(jsonPath(    "$.category").value("FUEL"));
     }
 }
