@@ -50,7 +50,7 @@ Os arquivos do Docker já estão no repositório do projeto. É apenas necessár
 
 Compilar Maven
 ```
-mvn clean package 
+mvn clean package -DskipTests
 ```
 
 Subir para container
