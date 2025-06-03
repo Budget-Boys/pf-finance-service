@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -64,12 +63,15 @@ class ExpenseServiceTest {
 
         ExpenseResponseDTO result = expenseService.saveExpense(createDTO);
 
-            assertNotNull(result, "Response should not be null");
-            assertEquals(responseDTO.getId(), result.getId(), "Response should have same id");
-            assertEquals(responseDTO.getAmount(), result.getAmount(),  "Response should have same amount");
-            verify(expenseRepository).save(expense);
-            verify(expenseMapper).requestToEntity(createDTO);
-            verify(expenseMapper).entityToResponse(expense);
+        assertNotNull(result, "Response should not be null");
+        assertEquals(responseDTO.getId(), result.getId(), "Response should have same id");
+        assertEquals(responseDTO.getAmount(), result.getAmount(),  "Response should have same amount");
+        assertEquals(responseDTO.getCategory(), result.getCategory(), "Response should have same category");
+        assertEquals(responseDTO.getUserId(), result.getUserId(), "Response should have same user id");
+
+        verify(expenseRepository).save(expense);
+        verify(expenseMapper).requestToEntity(createDTO);
+        verify(expenseMapper).entityToResponse(expense);
     }
 
     @Test
