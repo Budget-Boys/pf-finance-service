@@ -1,7 +1,5 @@
 package br.com.budgetboys.pf_finance_service.expense;
 
-import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.enums.ExpenseCategory;
-import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.enums.IncomeCategory;
 import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.JsonPathResultMatchers;
-
-import javax.print.attribute.standard.Media;
 
 import java.util.UUID;
 
@@ -35,7 +30,7 @@ public class ExpenseControllerIntegrationTest {
     private static String expenseId;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         userId = UUID.randomUUID();
     }
 
