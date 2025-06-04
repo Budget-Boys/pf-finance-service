@@ -48,7 +48,7 @@ public class ExpenseControllerIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath(    "$.category").value("FUEL"));
+                .andExpect(jsonPath("$.category").value("FUEL"));
     }
 
     @Test
@@ -77,5 +77,4 @@ public class ExpenseControllerIntegrationTest {
         mockMvc.perform(delete("/expenses/{id}", expenseId))
                 .andExpect(status().isOk());
     }
-
 }
