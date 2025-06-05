@@ -28,6 +28,7 @@ public class JPAExpenseEntity {
     @Column(name = "expense_amount", nullable = false)
     private double amount;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "expense_category", nullable = false)
     private ExpenseCategory category;
 

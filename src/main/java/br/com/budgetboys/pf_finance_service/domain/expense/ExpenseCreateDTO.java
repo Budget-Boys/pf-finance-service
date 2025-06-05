@@ -3,11 +3,13 @@ package br.com.budgetboys.pf_finance_service.domain.expense;
 import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.enums.ExpenseCategory;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.UUID;
 
 @Getter
+@AllArgsConstructor
 public class ExpenseCreateDTO {
 
     @Positive(message = "The expense amount must be positive")
