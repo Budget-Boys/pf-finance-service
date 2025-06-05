@@ -45,7 +45,7 @@ public class ExpenseController {
         }
     }
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<List<ExpenseResponseDTO>> findAll() {
         return ResponseEntity.ok(this.expenseService.findAll());
     }
