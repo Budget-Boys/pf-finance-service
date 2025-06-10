@@ -18,11 +18,12 @@ public class IncomeService {
 
     private final IncomeRepository incomeRepository;
 
-    @Autowired
-    private IncomeMapper incomeMapper;
+    private final IncomeMapper incomeMapper;
 
-    public IncomeService (IncomeRepository incomeRepository){
+    @Autowired
+    public IncomeService (IncomeRepository incomeRepository, IncomeMapper incomeMapper) {
         this.incomeRepository = incomeRepository;
+        this.incomeMapper = incomeMapper;
     }
     
     public IncomeResponseDTO saveIncome(IncomeCreateDTO income){
