@@ -25,7 +25,7 @@ public class IncomeService {
         this.incomeRepository = incomeRepository;
         this.incomeMapper = incomeMapper;
     }
-    
+
     public IncomeResponseDTO saveIncome(IncomeCreateDTO income){
 
         if(income.getAmount() < 0){
@@ -59,5 +59,9 @@ public class IncomeService {
         }
 
         this.incomeRepository.delete(income);
+    }
+
+    public List<IncomeResponseDTO> findAllByUserId(UUID userId){
+        return this.incomeRepository.findAllByUserId(userId).stream().map(this.incomeMapper::entityToResponse).collect(Collectors.toList());
     }
 }

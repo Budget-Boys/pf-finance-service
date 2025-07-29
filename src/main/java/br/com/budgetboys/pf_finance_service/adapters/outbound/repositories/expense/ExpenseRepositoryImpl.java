@@ -36,8 +36,8 @@ public class ExpenseRepositoryImpl implements ExpenseRepository {
     @Override
     public Expense findById(UUID id) {
         return jpaExpenseRepository.findById(id)
-            .map(expenseMapper::jpaToEntity)
-            .orElse(null);
+                .map(expenseMapper::jpaToEntity)
+                .orElse(null);
     }
 
     @Override
@@ -49,5 +49,13 @@ public class ExpenseRepositoryImpl implements ExpenseRepository {
     public void delete(Expense expense) {
         JPAExpenseEntity jpaExpenseEntity = this.expenseMapper.expenseToJpa(expense);
         this.jpaExpenseRepository.delete(jpaExpenseEntity);
+    }
+
+    @Override
+    public List<Expense> findAllByUserId(UUID userId) {
+        return this.jpaExpenseRepository.findAllByUserId(userId)
+                .stream()
+                .map(expenseMapper::jpaToEntity)
+                .collect(Collectors.toList());
     }
 }

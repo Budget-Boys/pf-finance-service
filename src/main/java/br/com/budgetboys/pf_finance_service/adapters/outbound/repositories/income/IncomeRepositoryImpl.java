@@ -50,4 +50,12 @@ public class IncomeRepositoryImpl implements IncomeRepository {
         JPAIncomeEntity jpaIncomeEntity = this.incomeMapper.entityToJpa(income);
         this.jpaIncomeRepository.delete(jpaIncomeEntity);
     }
+
+    @Override
+    public List<Income> findAllByUserId(UUID userId) {
+        return this.jpaIncomeRepository.findAllByUserId(userId)
+                .stream()
+                .map(incomeMapper::jpaToEntity)
+                .collect(Collectors.toList());
+    }
 }

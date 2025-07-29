@@ -47,10 +47,10 @@ public class ExpenseService {
     }
 
     public List<ExpenseResponseDTO> findAll(){
-       return this.expenseRepository.findAll()
-               .stream()
-               .map(this.expenseMapper::entityToResponse)
-               .collect(Collectors.toList());
+        return this.expenseRepository.findAll()
+                .stream()
+                .map(this.expenseMapper::entityToResponse)
+                .collect(Collectors.toList());
     }
 
     public void deleteExpense(UUID id){
@@ -61,5 +61,11 @@ public class ExpenseService {
         }
 
         this.expenseRepository.delete(expense);
+    }
+
+    public List<ExpenseResponseDTO> findExpensesByUserId(UUID userId) {
+        return this.expenseRepository.findAllByUserId(userId).stream()
+                .map(this.expenseMapper::entityToResponse)
+                .collect(Collectors.toList());
     }
 }
