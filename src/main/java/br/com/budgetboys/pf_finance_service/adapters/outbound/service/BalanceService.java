@@ -23,7 +23,7 @@ public class BalanceService {
         this.incomeRepository = incomeRepository;
     }
 
-    public BalanceSheetResponseDTO getBalanceSheet(UUID userId){
+    public BalanceSheetResponseDTO getBalanceSheet(UUID userId) {
         BalanceSheetResponseDTO balanceSheetResponseDTO = new BalanceSheetResponseDTO();
 
         double expensesAmountTotal = expenseRepository.findAllByUserId(userId).stream().map(Expense::getAmount).count();
@@ -34,13 +34,12 @@ public class BalanceService {
 
         double balance = incomesAmountTotal - expensesAmountTotal;
 
-
         balanceSheetResponseDTO.setBalance(Math.abs(balance));
 
-        if(balance < 0) {
-            balanceSheetResponseDTO.setStatus("POSITIVE");
-        } else {
+        if (balance < 0) {
             balanceSheetResponseDTO.setStatus("NEGATIVE");
+        } else {
+            balanceSheetResponseDTO.setStatus("POSITIVE");
         }
 
         return balanceSheetResponseDTO;
