@@ -3,7 +3,6 @@ package br.com.budgetboys.pf_finance_service.adapters.outbound.repositories.inco
 import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.JPAIncomeEntity;
 import br.com.budgetboys.pf_finance_service.domain.income.Income;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeRepository;
-import br.com.budgetboys.pf_finance_service.domain.income.IncomeResponseDTO;
 import br.com.budgetboys.pf_finance_service.utils.mappers.IncomeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

@@ -1,7 +1,6 @@
 package br.com.budgetboys.pf_finance_service.adapters.outbound.entities;
 
 import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.enums.ExpenseCategory;
-import br.com.budgetboys.pf_finance_service.domain.expense.Expense;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

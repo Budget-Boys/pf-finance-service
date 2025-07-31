@@ -2,8 +2,6 @@ package br.com.budgetboys.pf_finance_service.income;
 
 import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.enums.IncomeCategory;
 import br.com.budgetboys.pf_finance_service.adapters.outbound.service.income.IncomeService;
-import br.com.budgetboys.pf_finance_service.domain.expense.Expense;
-import br.com.budgetboys.pf_finance_service.domain.expense.ExpenseResponseDTO;
 import br.com.budgetboys.pf_finance_service.domain.income.Income;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeCreateDTO;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeRepository;
@@ -17,7 +15,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
