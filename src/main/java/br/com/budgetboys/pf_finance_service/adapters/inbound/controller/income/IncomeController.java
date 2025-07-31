@@ -61,4 +61,9 @@ public class IncomeController {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
+
+    @GetMapping("/by-user/{id}")
+    public ResponseEntity<List<IncomeResponseDTO>> findAllByUserId(@PathVariable("id") UUID userId) {
+        return ResponseEntity.ok().body(this.incomeService.findAllByUserId(userId));
+    }
 }

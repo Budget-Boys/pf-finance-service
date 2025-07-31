@@ -3,7 +3,6 @@ package br.com.budgetboys.pf_finance_service.adapters.outbound.repositories.inco
 import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.JPAIncomeEntity;
 import br.com.budgetboys.pf_finance_service.domain.income.Income;
 import br.com.budgetboys.pf_finance_service.domain.income.IncomeRepository;
-import br.com.budgetboys.pf_finance_service.domain.income.IncomeResponseDTO;
 import br.com.budgetboys.pf_finance_service.utils.mappers.IncomeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -49,5 +48,13 @@ public class IncomeRepositoryImpl implements IncomeRepository {
     public void delete(Income income) {
         JPAIncomeEntity jpaIncomeEntity = this.incomeMapper.entityToJpa(income);
         this.jpaIncomeRepository.delete(jpaIncomeEntity);
+    }
+
+    @Override
+    public List<Income> findAllByUserId(UUID userId) {
+        return this.jpaIncomeRepository.findAllByUserId(userId)
+                .stream()
+                .map(incomeMapper::jpaToEntity)
+                .collect(Collectors.toList());
     }
 }

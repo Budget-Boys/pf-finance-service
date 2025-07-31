@@ -8,4 +8,5 @@ public interface IncomeRepository {
     Income findById(UUID id);
     List<Income> findAll();
     void delete(Income income);
+    List<Income> findAllByUserId(UUID userId);
 }

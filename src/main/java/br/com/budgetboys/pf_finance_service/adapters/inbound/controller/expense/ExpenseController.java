@@ -61,4 +61,9 @@ public class ExpenseController {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
+
+    @GetMapping("/by-user/{id}")
+    public ResponseEntity<List<ExpenseResponseDTO>> findAllByUserId(@PathVariable("id") UUID userId) {
+        return ResponseEntity.ok().body(this.expenseService.findExpensesByUserId(userId));
+    }
 }
