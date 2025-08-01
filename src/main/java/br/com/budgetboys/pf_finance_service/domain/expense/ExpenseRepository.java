@@ -8,4 +8,5 @@ public interface ExpenseRepository {
     Expense findById(UUID id);
     List<Expense> findAll();
     void delete(Expense expense);
+    List<Expense> findAllByUserId(UUID userId);
 }

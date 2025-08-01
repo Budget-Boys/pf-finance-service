@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   pf-finance-service:
     build:
@@ -10,18 +12,20 @@ services:
       mysql:
         condition: service_healthy
     environment:
-      - DB_HOST=${DB_HOST}
+      - DB_HOST=mysql
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
       - SPRING_PORT=${SPRING_PORT}
+      - FINANCE_DB_PORT=${FINANCE_DB_PORT}
+      - EUREKA_URL=${EUREKA_URL}
     command: ["java", "-jar", "app.jar"]
 
   mysql:
     image: mysql:8.0
     container_name: pf-finance-mysql
     ports:
-      - "3306:3306"
+      - "${MYSQL_PORT}:3306"
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
