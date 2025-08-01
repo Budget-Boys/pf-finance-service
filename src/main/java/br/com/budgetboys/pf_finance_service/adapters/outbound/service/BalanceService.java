@@ -26,8 +26,8 @@ public class BalanceService {
     public BalanceSheetResponseDTO getBalanceSheet(UUID userId) {
         BalanceSheetResponseDTO balanceSheetResponseDTO = new BalanceSheetResponseDTO();
 
-        double expensesAmountTotal = expenseRepository.findAllByUserId(userId).stream().map(Expense::getAmount).count();
-        double incomesAmountTotal = incomeRepository.findAllByUserId(userId).stream().map(Income::getAmount).count();
+        double expensesAmountTotal = expenseRepository.findAllByUserId(userId).stream().mapToDouble(Expense::getAmount).sum();
+        double incomesAmountTotal = incomeRepository.findAllByUserId(userId).stream().mapToDouble(Income::getAmount).sum();
 
         balanceSheetResponseDTO.setExpensesAmountTotal(expensesAmountTotal);
         balanceSheetResponseDTO.setIncomesAmountTotal(incomesAmountTotal);
