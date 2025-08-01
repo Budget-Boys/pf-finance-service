@@ -8,6 +8,7 @@ import br.com.budgetboys.pf_finance_service.domain.income.IncomeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -26,8 +27,11 @@ public class BalanceService {
     public BalanceSheetResponseDTO getBalanceSheet(UUID userId) {
         BalanceSheetResponseDTO balanceSheetResponseDTO = new BalanceSheetResponseDTO();
 
-        double expensesAmountTotal = expenseRepository.findAllByUserId(userId).stream().mapToDouble(Expense::getAmount).sum();
-        double incomesAmountTotal = incomeRepository.findAllByUserId(userId).stream().mapToDouble(Income::getAmount).sum();
+        List<Expense> expenses = expenseRepository.findAllByUserId(userId);
+        List<Income> incomes = incomeRepository.findAllByUserId(userId);
+
+        double expensesAmountTotal = expenses.stream().mapToDouble(Expense::getAmount).sum();
+        double incomesAmountTotal = incomes.stream().mapToDouble(Income::getAmount).sum();
 
         balanceSheetResponseDTO.setExpensesAmountTotal(expensesAmountTotal);
         balanceSheetResponseDTO.setIncomesAmountTotal(incomesAmountTotal);
@@ -41,6 +45,9 @@ public class BalanceService {
         } else {
             balanceSheetResponseDTO.setStatus("POSITIVE");
         }
+
+        balanceSheetResponseDTO.setExpensesTolal(expenses.size());
+        balanceSheetResponseDTO.setIncomesTotal(incomes.size());
 
         return balanceSheetResponseDTO;
     }
