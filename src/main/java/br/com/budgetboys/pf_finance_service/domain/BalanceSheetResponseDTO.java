@@ -11,6 +11,8 @@ public class BalanceSheetResponseDTO {
     private double expensesAmountTotal;
     private double incomesAmountTotal;
     private double balance;
+    private int expensesTolal;
+    private int incomesTotal;
 
     public String getStatus() {
         return status;
@@ -42,5 +44,21 @@ public class BalanceSheetResponseDTO {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public int getExpensesTolal() {
+        return expensesTolal;
+    }
+
+    public void setExpensesTolal(int expensesTolal) {
+        this.expensesTolal = expensesTolal;
+    }
+
+    public int getIncomesTotal() {
+        return incomesTotal;
+    }
+
+    public void setIncomesTotal(int incomesTotal) {
+        this.incomesTotal = incomesTotal;
     }
 }
