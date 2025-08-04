@@ -1,0 +1,12 @@
+name: Deploy pf-finance-service
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    uses: budget-boys/pf-ci-templates/.github/workflows/build-deploy.yml@main
+    with:
+      language: "java"
