@@ -13,10 +13,14 @@ public class Expense {
     private Date creationDate;
     private UUID userId;
 
-    public Expense(UUID id, double amount, ExpenseCategory category) {
+    public Expense() {
+    }
+
+    public Expense(UUID id, double amount, ExpenseCategory category, UUID userId) {
         this.id = id;
         this.amount = amount;
         this.category = category;
+        this.userId = userId;
     }
 
     public UUID getId() {

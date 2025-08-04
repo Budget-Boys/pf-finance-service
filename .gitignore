@@ -32,8 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 
-### Docker ###
-compose.yaml
-
-### Database config ###
-src/main/resources/application.properties
+.env

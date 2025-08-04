@@ -1,12 +1,12 @@
 package br.com.budgetboys.pf_finance_service.adapters.outbound.entities;
 
 import br.com.budgetboys.pf_finance_service.adapters.outbound.entities.enums.ExpenseCategory;
-import br.com.budgetboys.pf_finance_service.domain.expense.Expense;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 import java.util.UUID;
@@ -27,20 +27,15 @@ public class JPAExpenseEntity {
     @Column(name = "expense_amount", nullable = false)
     private double amount;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "expense_category", nullable = false)
     private ExpenseCategory category;
 
-    @Column(name = "creation_date", nullable = false)
+    @CreationTimestamp
+    @Column(name = "creation_date", nullable = false, updatable = false)
     private Date creationDate;
 
     @Column(name = "user_id", nullable = false)
     private UUID userId;
 
-    public JPAExpenseEntity(Expense expense) {
-        this.id = expense.getId();
-        this.amount = expense.getAmount();
-        this.category = expense.getCategory();
-        this.creationDate = expense.getCreationDate();
-        this.userId = expense.getUserId();
-    }
 }
