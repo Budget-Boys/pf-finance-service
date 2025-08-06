@@ -1,9 +1,10 @@
-FROM eclipse-temurin:21-jdk-jammy
+FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
 COPY target/*.jar app.jar
+COPY wait-for-it.sh wait-for-it.sh
 
-EXPOSE 9000
+RUN chmod +x wait-for-it.sh
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+CMD ["./wait-for-it.sh", "pf-finance-mysql:3306", "--timeout=120", "--", "java", "-jar", "app.jar"]
